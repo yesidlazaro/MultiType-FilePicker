@@ -16,8 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 import com.vincent.filepicker.R;
 import com.vincent.filepicker.ToastUtil;
 import com.vincent.filepicker.Util;
@@ -31,7 +30,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import static android.os.Environment.DIRECTORY_DCIM;
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.vincent.filepicker.Constant.REQUEST_CODE_TAKE_VIDEO;
 
 /**
@@ -111,12 +109,10 @@ public class VideoPickAdapter extends BaseAdapter<VideoFile, VideoPickAdapter.Vi
                 file = mList.get(position);
             }
 
-            RequestOptions options = new RequestOptions();
-            Glide.with(mContext)
+            Picasso.with(mContext)
                     .load(file.getPath())
-                    .apply(options.centerCrop())
-                    .transition(withCrossFade())
-//                    .transition(new DrawableTransitionOptions().crossFade(500))
+                    .centerCrop()
+                    .resize(100,100)
                     .into(holder.mIvThumbnail);
 
             if (file.isSelected()) {

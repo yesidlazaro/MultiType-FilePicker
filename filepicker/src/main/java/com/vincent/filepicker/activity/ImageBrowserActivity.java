@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bm.library.PhotoView;
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.vincent.filepicker.Constant;
 import com.vincent.filepicker.R;
 import com.vincent.filepicker.ToastUtil;
@@ -25,7 +25,6 @@ import com.vincent.filepicker.filter.entity.ImageFile;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.vincent.filepicker.activity.ImagePickActivity.DEFAULT_MAX_NUMBER;
 
 /**
@@ -156,10 +155,10 @@ public class ImageBrowserActivity extends BaseActivity {
             view.enable();
             view.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-            Glide.with(ImageBrowserActivity.this)
+            Picasso.with(ImageBrowserActivity.this)
                     .load(mList.get(position).getPath())
-                    .transition(withCrossFade())
                     .into(view);
+
             container.addView(view);
             return view;
         }

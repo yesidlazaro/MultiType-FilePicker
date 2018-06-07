@@ -14,8 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 import com.vincent.filepicker.Constant;
 import com.vincent.filepicker.R;
 import com.vincent.filepicker.ToastUtil;
@@ -31,7 +30,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import static android.os.Environment.DIRECTORY_DCIM;
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.vincent.filepicker.activity.ImageBrowserActivity.IMAGE_BROWSER_INIT_INDEX;
 import static com.vincent.filepicker.activity.ImageBrowserActivity.IMAGE_BROWSER_SELECTED_LIST;
 
@@ -90,7 +88,7 @@ public class ImagePickAdapter extends BaseAdapter<ImageFile, ImagePickAdapter.Im
 
                     ContentValues contentValues = new ContentValues(1);
                     contentValues.put(MediaStore.Images.Media.DATA, mImagePath);
-                    mImageUri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+                    mImageUri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
 
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                     if (Util.detectIntent(mContext, intent)) {
@@ -112,12 +110,10 @@ public class ImagePickAdapter extends BaseAdapter<ImageFile, ImagePickAdapter.Im
                 file = mList.get(position);
             }
 
-            RequestOptions options = new RequestOptions();
-            Glide.with(mContext)
+            Picasso.with(mContext)
                     .load(file.getPath())
-                    .apply(options.centerCrop())
-                    .transition(withCrossFade())
-//                    .transition(new DrawableTransitionOptions().crossFade(500))
+                    .centerCrop()
+                    .resize(100, 100)
                     .into(holder.mIvThumbnail);
 
             if (file.isSelected()) {
