@@ -70,10 +70,10 @@ public class NormalFilePickActivity extends BaseActivity {
     }
 
     private void initView() {
-        tv_count = (TextView) findViewById(R.id.tv_count);
-        tv_count.setText(mCurrentNumber + "/" + mMaxNumber);
+        tv_count = findViewById(R.id.tv_count);
+        tv_count.setText(String.format("%d/%d", mCurrentNumber, mMaxNumber));
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_file_pick);
+        mRecyclerView = findViewById(R.id.rv_file_pick);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new DividerListItemDecoration(this,
@@ -91,13 +91,13 @@ public class NormalFilePickActivity extends BaseActivity {
                     mSelectedList.remove(file);
                     mCurrentNumber--;
                 }
-                tv_count.setText(mCurrentNumber + "/" + mMaxNumber);
+                tv_count.setText(String.format("%d/%d", mCurrentNumber, mMaxNumber));
             }
         });
 
-        mProgressBar = (ProgressBar) findViewById(R.id.pb_file_pick);
+        mProgressBar = findViewById(R.id.pb_file_pick);
 
-        rl_done = (RelativeLayout) findViewById(R.id.rl_done);
+        rl_done = findViewById(R.id.rl_done);
         rl_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +108,8 @@ public class NormalFilePickActivity extends BaseActivity {
             }
         });
 
-        tb_pick = (RelativeLayout) findViewById(R.id.tb_pick);
-        ll_folder = (LinearLayout) findViewById(R.id.ll_folder);
+        tb_pick = findViewById(R.id.tb_pick);
+        ll_folder = findViewById(R.id.ll_folder);
         if (isNeedFolderList) {
             ll_folder.setVisibility(View.VISIBLE);
             ll_folder.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +118,7 @@ public class NormalFilePickActivity extends BaseActivity {
                     mFolderHelper.toggle(tb_pick);
                 }
             });
-            tv_folder = (TextView) findViewById(R.id.tv_folder);
+            tv_folder = findViewById(R.id.tv_folder);
             tv_folder.setText(getResources().getString(R.string.vw_all));
 
             mFolderHelper.setFolderListListener(new FolderListAdapter.FolderListListener() {

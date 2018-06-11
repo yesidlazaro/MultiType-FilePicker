@@ -97,19 +97,33 @@ public class NormalFilePickAdapter extends BaseAdapter<NormalFile, NormalFilePic
             }
         });
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Uri uri = Uri.parse("file://" + file.getPath());
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setDataAndType(uri, "audio/mp3");
-//                if (Util.detectIntent(mContext, intent)) {
-//                    mContext.startActivity(intent);
-//                } else {
-//                    Toast.makeText(mContext, "No Application exists for audio!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!v.isSelected() && isUpToMax()) {
+                    ToastUtil.getInstance(mContext).showToast(R.string.vw_up_to_max);
+                    return;
+                }
+
+                if (v.isSelected()) {
+                    holder.mCbx.setSelected(false);
+                    mCurrentNumber--;
+                } else {
+                    holder.mCbx.setSelected(true);
+                    mCurrentNumber++;
+                }
+
+                mList.get(holder.getAdapterPosition()).setSelected(holder.mCbx.isSelected());
+
+                if (mListener != null) {
+                    mListener.OnSelectStateChanged(holder.mCbx.isSelected(), mList.get(holder.getAdapterPosition()));
+                }
+            }
+        });
+
+
+
+
     }
 
     @Override
@@ -133,5 +147,6 @@ public class NormalFilePickAdapter extends BaseAdapter<NormalFile, NormalFilePic
     private boolean isUpToMax() {
         return mCurrentNumber >= mMaxNumber;
     }
+
 
 }
