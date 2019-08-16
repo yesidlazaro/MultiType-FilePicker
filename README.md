@@ -1,5 +1,5 @@
 # MultiType-FilePicker
-[![Download](https://api.bintray.com/packages/vincentwoo/maven/MultiTypeFilePicker/images/download.svg) ](https://bintray.com/vincentwoo/maven/MultiTypeFilePicker/_latestVersion)
+
 
 This is a light Android file picker library.
 
